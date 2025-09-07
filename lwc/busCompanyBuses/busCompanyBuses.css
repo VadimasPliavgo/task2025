@@ -1,0 +1,14 @@
+.passenger-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* two columns */
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+
+.passenger-item {
+    display: flex;
+    align-items: center;
+    background: #f3f3f3;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+}

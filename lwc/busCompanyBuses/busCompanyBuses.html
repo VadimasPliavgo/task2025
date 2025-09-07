@@ -1,0 +1,53 @@
+<template>
+    <lightning-card title="Buses and Passengers">
+        <template if:true={hasBuses}>
+            <lightning-accordion allow-multiple-sections-open>
+                <template for:each={buses} for:item="bus">
+                    <lightning-accordion-section 
+                        key={bus.busId} 
+                        name={bus.busId}
+                        label={bus.label}>
+
+                        <!-- Button to open Bus record -->
+                        <div class="slds-m-top_medium slds-m-bottom_small">
+                            <lightning-button
+                                label="Go to Bus Record"
+                                variant="brand"
+                                title="Go to Bus Record"
+                                onclick={openBusRecord}
+                                data-id={bus.busId}>
+                            </lightning-button>
+                        </div>
+
+                        <!-- Passengers -->
+                        <template if:true={bus.passengers}>
+                            <div class="passenger-grid">
+                                <template for:each={bus.passengers} for:item="p">
+                                    <div key={p.passengerId} class="passenger-item">
+                                        <lightning-icon 
+                                            icon-name="standard:contact" 
+                                            size="x-small" 
+                                            class="slds-m-right_x-small">
+                                        </lightning-icon>
+                                        <lightning-formatted-url
+                                            value={p.passengerUrl}
+                                            label={p.passengerName}
+                                            target="_blank">
+                                        </lightning-formatted-url>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                        <template if:false={bus.passengers}>
+                            <p class="slds-p-around_small">No passengers for this bus.</p>
+                        </template>
+                    </lightning-accordion-section>
+                </template>
+            </lightning-accordion>
+        </template>
+
+        <template if:false={hasBuses}>
+            <p class="slds-p-around_medium">🚍 This company has no buses.</p>
+        </template>
+    </lightning-card>
+</template>
